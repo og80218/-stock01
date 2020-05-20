@@ -76,7 +76,8 @@ for pdate in range(y, y+days):
         abc[9] = (abc[9].replace(',', ''))
         # print(abc)        #print(abc)可先解註解，下述程式碼可先註解，先完成爬蟲部分，再做寫入mysql部分
 
-    # OK
+    # OK        
+    #mysql，SELECT * FROM project_test.margin_trading_short_selling;執行完，可點Fetch_rows=>下一頁的意思
         try:
             cursor.execute('INSERT INTO margin_trading_short_selling(date, stockiid, margin_buy, margin_cell, '
                            'margin_remaining, margin_limit, short_buy, short_cell, '
@@ -88,6 +89,6 @@ for pdate in range(y, y+days):
       #若遇到索IP，請設定隨機停留時間
 #     sleep_time = random.randint(15, 30) + random.random()
 #     time.sleep(sleep_time)
-db.commit()
-cursor.close()
+# db.commit()
+# cursor.close()
 print('Done')
