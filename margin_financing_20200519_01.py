@@ -74,7 +74,7 @@ for pdate in range(y, y+days):
         abc[7] = (abc[7].replace(',', ''))
         abc[8] = (abc[8].replace(',', ''))
         abc[9] = (abc[9].replace(',', ''))
-        # print(abc)
+        # print(abc)        #print(abc)可先解註解，下述程式碼可先註解，先完成爬蟲部分，再做寫入mysql部分
 
     # OK
         try:
@@ -85,6 +85,7 @@ for pdate in range(y, y+days):
 
         except Exception as err:
             print(err.args)
+      #若遇到索IP，請設定隨機停留時間
 #     sleep_time = random.randint(15, 30) + random.random()
 #     time.sleep(sleep_time)
 db.commit()
