@@ -1,11 +1,20 @@
-#給予起始時間及結束時間
+#給予起始時間
 
 import datetime
+
+#西元改民國
+def turnyear(A):
+    y = str( int( A[0:4] ) - 1911 )
+    m = A[4:6]
+    d = A[6:8]
+    B = y + '/' + m + '/' + d
+    return B
+
 def create_assist_date(datestart=None, dateend=None):
     if datestart is None:
-        datestart = '20161003'      #輸入起始西元年月份
+        datestart = '20161003'
     if dateend is None:
-        dateend = datetime.datetime.now().strftime( '20161004' )        #輸入結束西元年月份
+        dateend = datetime.datetime.now().strftime( '20200521' )
 
     datestart = datetime.datetime.strptime( datestart, '%Y%m%d' )
     dateend = datetime.datetime.strptime( dateend, '%Y%m%d' )
