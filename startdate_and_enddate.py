@@ -26,11 +26,11 @@ def create_assist_date(datestart=None, dateend=None):
         date_list.append( datestart.strftime( '%Y%m%d' ) )
     return date_list
 
-#當天時間
+#給予當天時間
 def create_assist_date_now(datestart=None, dateend=None):
     if datestart is None:
-        datestart = str(datetime.datetime.now()).split(' ')[0].replace('-','')
-
+        datestart = int(str(datetime.datetime.now()).split(' ')[0].replace('-','')) - 1
+        datestart = str(datestart)
     if dateend is None:
         dateend = datetime.datetime.now().strftime( '%Y%m%d' )
 
