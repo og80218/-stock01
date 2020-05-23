@@ -1,7 +1,7 @@
 # -*- encoding: utf8-*-
 #融資融券上市資料爬蟲入mysql=>OK
 #融資融券上櫃資料寫入mysql=>OK
-#跑之前記得去設startdate_and_enddate.py的起始日期及結束日期，太多天記得設隨機休息
+#只爬爬前一日資料
 
 from bs4 import BeautifulSoup
 import requests
@@ -10,7 +10,7 @@ import MySQLdb
 from datetime import datetime
 import time
 import random
-import startdate_and_enddate      #去抓startdate_and_enddate.py => 設定抓取資料的起始日及結束日
+import startdate_and_enddate      #去抓startdate_and_enddate.py => 設定抓取資料的前一日
 
 
 Stockiid = {'台泥': '1101', '亞泥': '1102', '嘉泥': '1103', '環泥': '1104', '幸福': '1108', '信大': '1109', '東泥': '1110',
@@ -292,8 +292,8 @@ def main():
     #proxy = random.choice(proxylist)
     #proxies = {'http': 'http://' + proxy, 'https': 'https://' + proxy}
     # headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36'}
-    # 設定抓取資料的起始日及結束日的變數
-    T = (startdate_and_enddate.create_assist_date())
+    # 設定抓取資料的起始日及結束日的變數     T = (startdate_and_enddate.create_assist_date())
+    T = (startdate_and_enddate.create_assist_date_now())
     # 設定抓取資料的當天的變數須改        T = (startdate_and_enddate.create_assist_date_now())
 
     for t in T:
@@ -346,8 +346,10 @@ def main():
 
             except Exception as err:
                 print(err.args)
-        sleep_time = random.randint(15, 30) + random.random()
-        time.sleep(sleep_time)
+        # sleep_time = random.randint(15, 30) + random.random()
+        # time.sleep(sleep_time)
+    db.commit()
+    cursor.close()
     print('Done')
 
 if __name__ == "__main__":
@@ -367,9 +369,9 @@ def main1():
     #proxies = {'http': 'http://' + proxy, 'https': 'https://' + proxy}
     # headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36'}
 
-    # 設定抓取資料的起始日及結束日的變數
+    # 設定抓取資料的起始日及結束日的變數     T = (startdate_and_enddate.create_assist_date())
     # 設定抓取資料的當天的變數須改        T = (startdate_and_enddate.create_assist_date_now())
-    T = (startdate_and_enddate.create_assist_date('20161003'))
+    T = (startdate_and_enddate.create_assist_date_now())
     T = [startdate_and_enddate.turnyear(t) for t in T]  # 強制西元改民國
     # print(T)
 
@@ -430,8 +432,10 @@ def main1():
             except Exception as err:
                 print(err.args)
 
-        sleep_time = random.randint(15, 30) + random.random()
-        time.sleep(sleep_time)
+        # sleep_time = random.randint(15, 30) + random.random()
+        # time.sleep(sleep_time)
+    db.commit()
+    cursor.close()
     print('Done')
 
 if __name__ == "__main__":
